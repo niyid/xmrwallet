@@ -28,16 +28,14 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.m2049r.xmrwallet.R;
-import com.m2049r.xmrwallet.util.Helper;
 
-public class DonationFragment extends DialogFragment {
+public class CreditsFragment extends DialogFragment {
     static final String TAG = "DonationFragment";
 
-    public static DonationFragment newInstance() {
-        return new DonationFragment();
+    public static CreditsFragment newInstance() {
+        return new CreditsFragment();
     }
 
     public static void display(FragmentManager fm) {
@@ -47,24 +45,14 @@ public class DonationFragment extends DialogFragment {
             ft.remove(prev);
         }
 
-        DonationFragment.newInstance().show(ft, TAG);
+        CreditsFragment.newInstance().show(ft, TAG);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_donation, null);
+        final View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_credits, null);
 
-        ((TextView) view.findViewById(R.id.tvCredits)).setText(Html.fromHtml(getString(R.string.donation_credits)));
-
-        (view.findViewById(R.id.bCopyAddress)).
-                setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Helper.clipBoardCopy(getActivity(), getString(R.string.label_copy_address),
-                                ((TextView) view.findViewById(R.id.tvWalletAddress)).getText().toString());
-                        Toast.makeText(getActivity(), getString(R.string.message_copy_address), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        ((TextView) view.findViewById(R.id.tvCredits)).setText(Html.fromHtml(getString(R.string.credits_text)));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
