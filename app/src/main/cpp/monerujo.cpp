@@ -578,6 +578,12 @@ Java_com_m2049r_xmrwallet_model_WalletManager_closeJ(JNIEnv *env, jobject instan
 /************ Wallet **************/
 /**********************************/
 
+JNIEXPORT void JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_rescanSpent(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    wallet->rescanSpent();
+}
+
 JNIEXPORT jstring JNICALL
 Java_com_m2049r_xmrwallet_model_Wallet_getSeed(JNIEnv *env, jobject instance, jstring seedOffset) {
     const char *_seedOffset = env->GetStringUTFChars(seedOffset, nullptr);
@@ -1291,7 +1297,7 @@ Java_com_m2049r_xmrwallet_model_Wallet_getLastSubaddress(JNIEnv *env, jobject in
 //virtual bool rescanSpent() = 0;
 
 
-// TransactionHistory
+// TransactionHistoryr
 JNIEXPORT jint JNICALL
 Java_com_m2049r_xmrwallet_model_TransactionHistory_getCount(JNIEnv *env, jobject instance) {
     Monero::TransactionHistory *history = getHandle<Monero::TransactionHistory>(env,

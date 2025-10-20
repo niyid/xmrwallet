@@ -14,3 +14,29 @@
 /monerujo.id
 /external-libs/VERSION
 /external-libs/include/wallet2_api.h
+# Add these lines to your existing .gitignore file
+
+# External Libraries - compressed archives
+external-libs/*.tar.gz
+external-libs/*.zip
+external-libs/*.tar.bz2
+external-libs/*.tar.xz
+
+# External Libraries - symlinks
+external-libs/boost-android
+
+# External Libraries - build directories
+external-libs/boost-prefix/
+external-libs/build-*/
+
+# External Libraries - build logs
+external-libs/*.log
+
+# External Libraries - dependencies
+external-libs/monero/
+external-libs/ndk*/
+external-libs/output/
+
+# External Libraries - specific build outputs
+external-libs/build-armeabi-v7a/
+external-libs/build-x86_64/
