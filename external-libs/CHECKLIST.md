@@ -1,5 +1,7 @@
 # Monero Android Build - Final Checklist
 
+<img src="https://github.com/niyid/xmrwallet/raw/master/monero_wallet.png" alt="Monero Wallet" width="200" height="200">
+
 ## ✅ Immediate Action (Get Your Current Build Output)
 
 Since your build already succeeded, extract it now:

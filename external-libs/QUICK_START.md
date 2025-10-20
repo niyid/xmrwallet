@@ -1,5 +1,7 @@
 # Quick Start Guide
 
+<img src="https://github.com/niyid/xmrwallet/raw/master/monero_wallet.png" alt="Monero Wallet" width="200" height="200">
+
 Get Monero Android libraries built in under 5 minutes.
 
 ## Prerequisites Check
@@ -300,4 +302,4 @@ For a complete working example, check out **Monerujo** wallet:
 - ✅ Build complete? → Create JNI wrapper and link libraries
 - 📖 Need linking help? → Read [BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md)
 - 🔍 See working example? → Study Monerujo source code
-- 🐛 Issues? → Check troubleshooting in BUILD_INSTRUCTIONS.md
+- 🛠 Issues? → Check troubleshooting in BUILD_INSTRUCTIONS.md

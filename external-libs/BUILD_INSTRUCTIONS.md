@@ -1,5 +1,7 @@
 # Build Instructions
 
+<img src="https://github.com/niyid/xmrwallet/raw/master/monero_wallet.png" alt="Monero Wallet" width="200" height="200">
+
 Complete guide for building Monero native libraries for Android.
 
 ## Prerequisites
