@@ -1,542 +1,389 @@
-# Monero Android Build Instructions
+# Build Instructions
 
-Comprehensive guide for building Monero wallet libraries for all Android architectures.
-
-## 📋 Table of Contents
-
-1. [Prerequisites](#prerequisites)
-2. [Quick Setup](#quick-setup)
-3. [Architecture Support](#architecture-support)
-4. [Building](#building)
-5. [Output Files](#output-files)
-6. [Integration](#integration)
-7. [Customization](#customization)
-8. [Troubleshooting](#troubleshooting)
-9. [Advanced Topics](#advanced-topics)
-
----
+Complete guide for building Monero native libraries for Android.
 
 ## Prerequisites
 
-### System Requirements
+- Docker installed and running
+- Bash shell (Linux/macOS/WSL)
+- 20+ GB free disk space
+- 4+ GB RAM
 
-- **Operating System**: Linux (Ubuntu 20.04+ recommended) or macOS
-- **Docker**: Version 20.10 or later
-- **RAM**: 8GB minimum, 16GB recommended
-- **Disk Space**: 25GB free space minimum
-- **CPU**: Multi-core processor (4+ cores recommended)
+## Quick Start
 
-### Required Tools
-
-```bash
-# Ubuntu/Debian
-sudo apt-get update
-sudo apt-get install wget unzip git docker.io
-
-# macOS
-brew install wget unzip git
-# Install Docker Desktop from docker.com
-```
-
-### Starting Docker
-
-```bash
-# Linux - start Docker service
-sudo systemctl start docker
-sudo usermod -aG docker $USER  # Add yourself to docker group
-newgrp docker  # Refresh group membership
-
-# macOS - start Docker Desktop application
-```
-
----
-
-## Quick Setup
-
-### Step 1: Clone Repository
-
-```bash
-git clone <your-repo-url>
-cd monero-android-build
-```
-
-### Step 2: Download Dependencies
-
-Run the automated setup script:
-
-```bash
-chmod +x setup-dependencies.sh
-./setup-dependencies.sh
-```
-
-This downloads (~1.2GB total):
-- Android NDK r29 (~1GB)
-- Boost 1.81.0 (~100MB)
-- Monero source code (~100MB)
-
-**Note**: First-time setup takes 10-20 minutes depending on your internet speed.
-
----
-
-## Architecture Support
-
-This build system supports all Android ABIs:
-
-| Architecture | Android ABI | Dockerfile | Typical Devices |
-|-------------|-------------|------------|-----------------|
-| ARM 32-bit  | armeabi-v7a | android32.Dockerfile | Older phones/tablets |
-| ARM 64-bit  | arm64-v8a   | android64.Dockerfile | Modern phones/tablets |
-| x86 32-bit  | x86         | androidx86.Dockerfile | Emulators, tablets |
-| x86 64-bit  | x86_64      | androidx64.Dockerfile | Emulators, tablets |
-
-**Recommendation**: Build arm64-v8a and armeabi-v7a for widest device support.
-
----
-
-## Building
-
-### Build All Architectures
+### Build All Architectures (Recommended)
 
 ```bash
 ./build-all-architectures.sh
 ```
 
-Builds all 4 architectures sequentially. Takes 3-4 hours on first run.
+This builds all three Android architectures (arm32, arm64, x86_64) sequentially.
 
-### Build Specific Architecture
+### Build Single Architecture
+
+Build only what you need:
 
 ```bash
-# Using individual scripts
-./build-android-arm64.sh     # ARM 64-bit
-./build-android-arm32.sh     # ARM 32-bit
-./build-android-x86_64.sh    # x86 64-bit
-./build-android-x86.sh       # x86 32-bit
+# ARM 32-bit (armeabi-v7a)
+./build-android-arm32.sh
 
-# Or using the all-in-one script
-./build-all-architectures.sh arm64
+# ARM 64-bit (arm64-v8a) - Most common for modern devices
+./build-android-arm64.sh
+
+# x86_64 - For emulators and x86 devices
+./build-android-x86_64.sh
 ```
 
-### Build Process Overview
+Or use the multi-arch script with an argument:
 
-Each build performs these steps:
+```bash
+./build-all-architectures.sh arm64
+./build-all-architectures.sh arm32
+./build-all-architectures.sh x86_64
+```
 
-1. **Setup Environment** (1 min)
-   - Configure Android NDK toolchain
-   - Set up cross-compilation environment
+## Output Structure
 
-2. **Build Boost** (15-20 min)
-   - Cross-compile Boost libraries for Android
-   - Builds: system, filesystem, thread, chrono, date_time, regex, serialization, program_options
-
-3. **Build OpenSSL** (5-10 min)
-   - Cross-compile crypto and ssl libraries
-
-4. **Build Dependencies** (10-15 min)
-   - Expat (XML parser)
-   - Unbound (DNS resolver)
-   - libsodium (cryptographic library)
-   - libzmq (ZeroMQ messaging)
-
-5. **Build Monero** (20-30 min)
-   - Configure with CMake for Android
-   - Build wallet_api and related components
-   - Merge all libraries into single files
-
-6. **Package Output** (< 1 min)
-   - Create libwallet_merged.a (static library)
-   - Create libwallet.so (shared library)
-
----
-
-## Output Files
-
-### File Locations
-
-After successful build:
+Build artifacts are organized by Android ABI:
 
 ```
 output/
-├── arm32/
-│   ├── libwallet_merged.a    # Static library (~154MB)
-│   └── libwallet.so          # Shared library (~25MB)
-├── arm64/
-│   ├── libwallet_merged.a    # Static library (~154MB)
-│   └── libwallet.so          # Shared library (~27MB)
-├── x86/
-│   ├── libwallet_merged.a    # Static library (~160MB)
-│   └── libwallet.so          # Shared library (~26MB)
+├── armeabi-v7a/
+│   └── lib/
+│       ├── libwallet.a
+│       ├── libwallet_api.a
+│       ├── libcryptonote_core.a
+│       ├── libcryptonote_basic.a
+│       ├── libblockchain_db.a
+│       ├── libringct.a
+│       ├── libringct_basic.a
+│       ├── libcommon.a
+│       ├── libepee.a
+│       ├── libmnemonics.a
+│       ├── libcncrypto.a
+│       ├── libeasylogging.a
+│       ├── libdevice.a
+│       ├── libcheckpoints.a
+│       ├── libcrypto.a (OpenSSL)
+│       ├── libssl.a (OpenSSL)
+│       ├── libboost_*.a (multiple Boost libraries)
+│       ├── libsodium.a
+│       ├── libzmq.a
+│       ├── libunbound.a
+│       └── libexpat.a
+├── arm64-v8a/
+│   └── lib/
+│       └── (same structure)
 └── x86_64/
-    ├── libwallet_merged.a    # Static library (~162MB)
-    └── libwallet.so          # Shared library (~28MB)
+    └── lib/
+        └── (same structure)
 ```
 
-### File Types
+### Key Library Files
 
-**libwallet_merged.a** (Static Library)
-- Contains all Monero wallet code and dependencies
-- Use when you want to statically link everything
-- Larger app size but no external dependencies
+- **libwallet_api.a** (~28 MB) - Main wallet API library
+- **libwallet.a** (~94 MB) - Core wallet implementation
+- **libcryptonote_core.a** (~26 MB) - Monero protocol implementation
+- **libcrypto.a / libssl.a** - OpenSSL cryptography
+- **libboost_*.a** - Boost C++ libraries
+- **libsodium.a** - Crypto library
+- **libzmq.a** - ZeroMQ messaging
 
-**libwallet.so** (Shared Library)
-- Contains all Monero wallet code and dependencies
-- Recommended for Android apps
-- Smaller app size, loaded at runtime
+All files are static libraries (`.a`) that need to be linked into your application or converted to shared libraries (`.so`).
 
-### Verification
+## Integration with Android Project
 
-```bash
-# Check architecture
-file output/arm64/libwallet.so
-# Expected: ELF 64-bit LSB shared object, ARM aarch64
+### Option 1: Create Shared Library (Recommended)
 
-# Check size
-ls -lh output/arm64/
+You'll need to create a JNI wrapper that links these static libraries into a shared library:
 
-# List symbols
-nm output/arm64/libwallet.so | grep -i wallet | head -10
-```
+1. Create a JNI wrapper (e.g., `monerujo.cpp`)
+2. Use CMake or ndk-build to link the static libraries
+3. Build `libmonerujo.so` (or your chosen name)
 
----
-
-## Integration
-
-### Copy to Android Project
-
-```bash
-# Create jniLibs directories
-mkdir -p YourApp/app/src/main/jniLibs/{armeabi-v7a,arm64-v8a}
-
-# Copy shared libraries (recommended)
-cp output/arm32/libwallet.so YourApp/app/src/main/jniLibs/armeabi-v7a/
-cp output/arm64/libwallet.so YourApp/app/src/main/jniLibs/arm64-v8a/
-
-# Optional: x86 for emulator testing
-cp output/x86_64/libwallet.so YourApp/app/src/main/jniLibs/x86_64/
-```
-
-### CMakeLists.txt Configuration
+Example `CMakeLists.txt`:
 
 ```cmake
-cmake_minimum_required(VERSION 3.18.1)
-project("your-app")
+cmake_minimum_required(VERSION 3.10)
+project(monerujo)
 
-# Import Monero wallet library
-add_library(monero-wallet SHARED IMPORTED)
-set_target_properties(monero-wallet PROPERTIES
-    IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../jniLibs/${ANDROID_ABI}/libwallet.so
+set(MONERO_LIBS_DIR ${CMAKE_SOURCE_DIR}/libs/${ANDROID_ABI}/lib)
+
+add_library(monerujo SHARED
+    monerujo.cpp
 )
 
-# Your JNI wrapper library
-add_library(your-native-lib SHARED
-    native-lib.cpp
-    wallet_jni.cpp
+target_link_libraries(monerujo
+    ${MONERO_LIBS_DIR}/libwallet_api.a
+    ${MONERO_LIBS_DIR}/libwallet.a
+    ${MONERO_LIBS_DIR}/libcryptonote_core.a
+    ${MONERO_LIBS_DIR}/libcryptonote_basic.a
+    ${MONERO_LIBS_DIR}/libblockchain_db.a
+    ${MONERO_LIBS_DIR}/libringct.a
+    ${MONERO_LIBS_DIR}/libringct_basic.a
+    ${MONERO_LIBS_DIR}/libcommon.a
+    ${MONERO_LIBS_DIR}/libepee.a
+    ${MONERO_LIBS_DIR}/libmnemonics.a
+    ${MONERO_LIBS_DIR}/libcncrypto.a
+    ${MONERO_LIBS_DIR}/libeasylogging.a
+    ${MONERO_LIBS_DIR}/libdevice.a
+    ${MONERO_LIBS_DIR}/libcheckpoints.a
+    ${MONERO_LIBS_DIR}/libcrypto.a
+    ${MONERO_LIBS_DIR}/libssl.a
+    ${MONERO_LIBS_DIR}/libboost_serialization.a
+    ${MONERO_LIBS_DIR}/libboost_filesystem.a
+    ${MONERO_LIBS_DIR}/libboost_thread.a
+    ${MONERO_LIBS_DIR}/libboost_program_options.a
+    ${MONERO_LIBS_DIR}/libboost_regex.a
+    ${MONERO_LIBS_DIR}/libboost_chrono.a
+    ${MONERO_LIBS_DIR}/libboost_system.a
+    ${MONERO_LIBS_DIR}/libboost_date_time.a
+    ${MONERO_LIBS_DIR}/libsodium.a
+    ${MONERO_LIBS_DIR}/libzmq.a
+    ${MONERO_LIBS_DIR}/libunbound.a
+    ${MONERO_LIBS_DIR}/libexpat.a
+    log
+    android
 )
-
-# Link libraries
-target_link_libraries(your-native-lib
-    monero-wallet
-    log      # Android logging
-    android  # Android framework
-)
 ```
 
-### Java/Kotlin Integration
+### Option 2: Direct Static Linking
 
-```kotlin
-class MoneroWallet {
-    companion object {
-        init {
-            System.loadLibrary("monero-wallet")
-            System.loadLibrary("your-native-lib")
-        }
-    }
-    
-    // Your JNI methods
-    external fun createWallet(path: String, password: String): Boolean
-    external fun getBalance(): Long
-    // ... more methods
-}
-```
+If you have a native component in your Android app, link these libraries directly in your build configuration.
 
----
-
-## Customization
-
-### Change API Level
-
-Edit Dockerfiles and modify:
-
-```dockerfile
-ENV API_LEVEL=33    # Change to your desired API level
-```
-
-Minimum supported: API 21 (Android 5.0)
-
-### Enable/Disable Features
-
-In the CMake configuration section:
-
-```dockerfile
--DUSE_DEVICE_TREZOR=OFF    # Hardware wallet support
--DUSE_DEVICE_LEDGER=OFF    # Hardware wallet support
--DUSE_UNBOUND=ON           # DNS resolution
--DTRANSLATIONS=OFF         # Internationalization
-```
-
-### Modify Monero Version
-
-Edit `setup-dependencies.sh`:
+### Copying Libraries to Your Project
 
 ```bash
-MONERO_BRANCH="release-v0.18"  # Change version here
+# Copy all architectures
+cp -r output/* your-app/src/main/cpp/libs/
+
+# Or specific architecture
+cp -r output/arm64-v8a your-app/src/main/cpp/libs/
 ```
 
-Then re-run setup:
+## Build Process Details
 
-```bash
-rm -rf monero
-./setup-dependencies.sh
-```
+### What Happens During Build
 
-### Custom Boost Version
+1. **Docker Image Creation**
+   - Pulls base Ubuntu 20.04 image
+   - Installs Android NDK r23c
+   - Sets up build dependencies
+   - Configures toolchain for target architecture
 
-1. Download different Boost version
-2. Update Dockerfile:
-```dockerfile
-COPY boost_1_XX_0.tar.gz ${WORK_DIR}/boost/
-```
+2. **Monero Compilation**
+   - Clones Monero repository (release-v0.18 branch)
+   - Builds dependencies (Boost, OpenSSL, Sodium, ZMQ, etc.)
+   - Compiles all Monero components as static libraries
+   - Builds wallet API layer
 
----
+3. **Artifact Extraction**
+   - Runs extraction script in container
+   - Copies all `.a` files to host output directory
+   - Organizes by Android ABI structure
+
+### Build Time Estimates
+
+- **First build**: 45-90 minutes per architecture
+- **Subsequent builds**: Uses Docker cache, much faster
+- **All architectures**: 2-4 hours (first time)
+
+## Architecture Details
+
+### ARM 32-bit (armeabi-v7a)
+- **Dockerfile**: `android32.Dockerfile`
+- **Target ABI**: armeabi-v7a
+- **Use case**: Older Android devices
+- **Min API**: 21 (Android 5.0)
+- **Output**: `output/armeabi-v7a/lib/*.a`
+
+### ARM 64-bit (arm64-v8a)
+- **Dockerfile**: `android64.Dockerfile`
+- **Target ABI**: arm64-v8a
+- **Use case**: Modern Android devices (most common)
+- **Min API**: 21 (Android 5.0)
+- **Output**: `output/arm64-v8a/lib/*.a`
+
+### x86_64
+- **Dockerfile**: `androidx64.Dockerfile`
+- **Target ABI**: x86_64
+- **Use case**: Android emulators, x86 tablets
+- **Min API**: 21 (Android 5.0)
+- **Output**: `output/x86_64/lib/*.a`
 
 ## Troubleshooting
 
-### Build Fails Immediately
+### Build Fails with "Out of Memory"
 
-**Symptom**: Build fails within first few minutes
+Increase Docker memory allocation:
+- Docker Desktop: Settings → Resources → Memory (set to 6GB+)
+- Linux: Adjust Docker daemon configuration
 
-**Solutions**:
+### Build Fails with "No space left on device"
+
+Clean Docker cache:
+
 ```bash
-# Verify all dependencies
-ls -la ndk29/ boost_1_81_0.tar.gz monero/
-
-# Re-run setup
-./setup-dependencies.sh
-
-# Check Docker is running
-docker ps
-```
-
-### Out of Disk Space
-
-**Symptom**: "No space left on device"
-
-**Solutions**:
-```bash
-# Clean Docker cache
 docker system prune -a
-
-# Remove old build images
-docker images | grep monero-android | awk '{print $3}' | xargs docker rmi
-
-# Check available space
-df -h
 ```
 
-### Build Very Slow
+### Extraction Script Not Found
 
-**Symptom**: Build taking much longer than expected
-
-**Solutions**:
-```bash
-# Check Docker resources
-docker info | grep -i "cpus\|memory"
-
-# Increase in Docker Desktop:
-# Settings → Resources → Increase CPU/Memory
-
-# Check system load
-top
-htop  # if installed
-```
-
-### Boost Build Fails
-
-**Symptom**: Error during Boost compilation
-
-**Solutions**:
-```bash
-# Verify Boost archive
-tar -tzf boost_1_81_0.tar.gz | head
-
-# Re-download if corrupted
-rm boost_1_81_0.tar.gz
-./setup-dependencies.sh
-```
-
-### Library Not in Output
-
-**Symptom**: `output/` directory empty after build
-
-**Solutions**:
-```bash
-# Check if library exists in container
-docker run --rm monero-android-arm64 ls -lh /work/out/
-
-# Manual extraction
-docker create --name temp monero-android-arm64
-docker cp temp:/work/out/libwallet.so ./output/arm64/
-docker rm temp
-```
-
-### CMake Configuration Errors
-
-**Symptom**: Errors during Monero CMake configuration
-
-**Solutions**:
-```bash
-# Save build log
-docker build -t monero-android-arm64 -f android64.Dockerfile . 2>&1 | tee build.log
-
-# Search for specific errors
-grep -i "error\|failed" build.log
-
-# Check dependency versions
-docker run --rm monero-android-arm64 bash -c "
-    ${TOOLCHAIN}/bin/aarch64-linux-android33-clang++ --version
-"
-```
-
----
-
-## Advanced Topics
-
-### Parallel Builds
-
-Build multiple architectures simultaneously:
+Make sure the Dockerfile includes the extraction script. Check that `/extract-libs.sh` exists in the container:
 
 ```bash
-# Terminal 1
-./build-android-arm64.sh &
-
-# Terminal 2
-./build-android-arm32.sh &
-
-# Wait for both
-wait
+docker run --rm monero-android-arm64 ls -la /extract-libs.sh
 ```
 
-### Incremental Builds
+### Missing Libraries in Output
 
-Docker caches each build layer. To rebuild only changed components:
+If some `.a` files are missing, check the build logs:
 
 ```bash
-# Modify Monero source
-# Then rebuild (uses cache for dependencies)
-docker build -t monero-android-arm64 -f android64.Dockerfile .
+docker run --rm monero-android-arm64 ls -la /work/out/lib/
 ```
 
-To force complete rebuild:
+### Build Succeeds but Output is Empty
+
+The extraction script may have failed silently. Run manually:
+
+```bash
+docker run --rm -v "$(pwd)/output:/host-output" \
+    monero-android-arm64 \
+    /extract-libs.sh /host-output
+```
+
+### Linking Errors When Building Android App
+
+Common issues:
+- **Undefined symbols**: Make sure to link libraries in correct order (dependencies first)
+- **Missing libraries**: Verify all required `.a` files are included
+- **ABI mismatch**: Ensure library ABI matches your target device/emulator
+
+Order matters when linking. Generally link in this order:
+1. Wallet API libraries (libwallet_api.a, libwallet.a)
+2. Core libraries (libcryptonote_core.a, etc.)
+3. Supporting libraries (libringct.a, libcommon.a, etc.)
+4. Crypto libraries (libcrypto.a, libssl.a, libsodium.a)
+5. Utility libraries (Boost, libzmq.a, libunbound.a, libexpat.a)
+
+## Advanced Usage
+
+### Custom Monero Version
+
+Edit the Dockerfile to change the branch:
+
+```dockerfile
+RUN git clone --recursive --branch release-v0.18 \
+    https://github.com/monero-project/monero.git
+```
+
+### Debug Build
+
+Add debug flags in the Dockerfile:
+
+```dockerfile
+ENV CFLAGS="-g -O0"
+ENV CXXFLAGS="-g -O0"
+```
+
+### Clean Build (No Cache)
 
 ```bash
 docker build --no-cache -t monero-android-arm64 -f android64.Dockerfile .
 ```
 
-### Custom Build Flags
-
-Add custom compiler flags by modifying Dockerfile:
-
-```dockerfile
--DCMAKE_CXX_FLAGS="-fPIC -O2 -DANDROID -DYOUR_CUSTOM_FLAG"
-```
-
-### Build with Different NDK
+### Inspect Build Container
 
 ```bash
-# Download different NDK version
-wget https://dl.google.com/android/repository/android-ndk-rXX-linux.zip
-unzip android-ndk-rXX-linux.zip
-mv android-ndk-rXX ndk-custom
-
-# Modify Dockerfile
-COPY ndk-custom ${ANDROID_NDK_HOME}
+docker run -it --rm monero-android-arm64 bash
 ```
 
----
+## Testing
 
-## Build Time Reference
+### Verify Libraries
 
-On Intel i7-10700K (8 cores/16 threads), 32GB RAM, SSD:
+Check libraries were built:
 
-| Stage | ARM64 | ARM32 | x86_64 | x86 |
-|-------|-------|-------|--------|-----|
-| Boost | 18min | 17min | 16min  | 15min |
-| OpenSSL | 8min | 7min | 7min | 7min |
-| Dependencies | 12min | 11min | 11min | 10min |
-| Monero | 22min | 23min | 24min | 25min |
-| **Total (first)** | **60min** | **58min** | **58min** | **57min** |
-| **Total (cached)** | **12min** | **11min** | **12min** | **11min** |
+```bash
+ls -lh output/arm64-v8a/lib/
+```
 
----
+Check for the key files:
+```bash
+file output/arm64-v8a/lib/libwallet_api.a
+```
 
-## Library Contents
+Should show: "current ar archive"
 
-`libwallet_merged.a` and `libwallet.so` include:
+### Library Sizes (Approximate)
 
-**Core Wallet**
-- `libwallet.a` - Wallet functionality
-- `libwallet_api.a` - Public API
+- libwallet.a: ~90-100 MB
+- libwallet_api.a: ~25-30 MB
+- libcryptonote_core.a: ~25-30 MB
+- libepee.a: ~25-30 MB
+- Others: 1-15 MB each
 
-**Cryptonote**
-- `libcryptonote_core.a` - Protocol implementation
-- `libcryptonote_basic.a` - Basic types
-- `libcryptonote_protocol.a` - Network protocol
+If sizes are significantly different, there may be a build issue.
 
-**Cryptography**
-- `libcncrypto.a` - Cryptographic primitives
-- `libringct.a` - Ring confidential transactions
-- `libringct_basic.a` - Basic RingCT
+## Performance Optimization
 
-**Supporting**
-- `libmnemonics.a` - Seed words
-- `libcommon.a` - Utilities
-- `libdevice.a` - Hardware wallets
-- `libcheckpoints.a` - Blockchain checkpoints
-- `libblockchain_db.a` - Database layer
-- `libeasylogging.a` - Logging
-- `libepee.a` - Network layer
+### Parallel Builds
 
-**External Dependencies**
-- Boost libraries (statically linked)
-- OpenSSL (statically linked)
-- libsodium (statically linked)
-- libzmq (statically linked)
-- Expat (statically linked)
-- Unbound (statically linked)
+Build multiple architectures in parallel (requires sufficient RAM):
 
----
+```bash
+./build-android-arm32.sh &
+./build-android-arm64.sh &
+./build-android-x86_64.sh &
+wait
+```
+
+### Disk Space Management
+
+Each Docker image is ~5GB. Clean up old images:
+
+```bash
+docker images | grep monero-android
+docker rmi <image-id>
+```
 
 ## Security Considerations
 
-1. **Verify Downloads**: Always verify checksums of downloaded dependencies
-2. **Use Release Versions**: Don't use debug builds in production
-3. **Code Signing**: Sign your Android app properly
-4. **Secure Storage**: Use Android Keystore for sensitive data
-5. **Network Security**: Use HTTPS/SSL for all connections
+- Always verify Monero source from official repository
+- Check commit signatures when possible
+- Review Dockerfiles before building
+- Use official Android NDK from Google
+- Keep build environment isolated
+- Verify checksums of built libraries if distributing
 
----
+## Next Steps After Building
 
-## License
+1. **Create JNI wrapper** - Write C/C++ code to interface with the Monero wallet API
+2. **Link static libraries** - Configure CMake or ndk-build to link all `.a` files
+3. **Build shared library** - Compile your JNI wrapper into a `.so` file
+4. **Integrate into Android** - Load the `.so` library in your Android app
+5. **Test thoroughly** - Verify wallet operations work correctly
 
-This build system is provided under MIT License. Monero is licensed under BSD 3-Clause License.
+## Contributing
 
----
+When modifying build scripts:
 
-## Support & Contributing
+1. Test all architectures
+2. Verify all expected `.a` files are produced
+3. Check file sizes are reasonable
+4. Update documentation
+5. Test integration with sample Android app
 
-- **Issues**: Open an issue on GitHub
-- **Contributions**: Pull requests welcome
-- **Documentation**: Help improve these docs
+## Support
 
----
+For build issues:
+- Check this documentation first
+- Review Docker logs for specific errors
+- Verify prerequisites are met
+- Test with a clean Docker environment
 
-**Note**: These are cross-compiled libraries for Android devices. They cannot run on your build host (Linux/macOS).
+For Monero-specific issues:
+- Refer to official Monero documentation
+- Check Monero GitHub issues
+- Review wallet API documentation at https://github.com/monero-project/monero

@@ -26,14 +26,12 @@ file output/arm32/libwallet_merged.a
 ### Step 1: Update Your Dockerfile ✓
 - [ ] android32.Dockerfile - Already updated with output section
 - [ ] android64.Dockerfile - Copy from artifact provided
-- [ ] androidx86.Dockerfile - Copy from artifact provided  
 - [ ] androidx64.Dockerfile - Copy from artifact provided
 
 ### Step 2: Create Build Scripts
 - [ ] Copy `build-all-architectures.sh` 
 - [ ] Copy `build-android-arm32.sh`
 - [ ] Copy `build-android-arm64.sh`
-- [ ] Copy `build-android-x86.sh`
 - [ ] Copy `build-android-x86_64.sh`
 - [ ] Make all scripts executable: `chmod +x build-*.sh`
 
@@ -49,9 +47,6 @@ file output/arm32/libwallet_merged.a
 ```bash
 # Build ARM 64-bit
 ./build-android-arm64.sh
-
-# Build x86
-./build-android-x86.sh
 
 # Build x86_64
 ./build-android-x86_64.sh
@@ -75,22 +70,12 @@ your-project/
 ├── build-all-architectures.sh
 ├── build-android-arm32.sh
 ├── build-android-arm64.sh
-├── build-android-x86.sh
 ├── build-android-x86_64.sh
 ├── BUILD_INSTRUCTIONS.md
 ├── QUICK_START.md
 ├── ndk29/
 ├── boost_1_81_0.tar.gz
 ├── monero/
-└── output/
-    ├── arm32/
-    │   └── libwallet_merged.a      ✓ You have this now!
-    ├── arm64/
-    │   └── libwallet_merged.a      □ Optional
-    ├── x86/
-    │   └── libwallet_merged.a      □ Optional
-    └── x86_64/
-        └── libwallet_merged.a      □ Optional
 ```
 
 ---
@@ -113,10 +98,9 @@ your-project/
 1. Build all 4 architectures using scripts
 2. Copy all libraries:
    ```bash
-   mkdir -p YourApp/app/src/main/jniLibs/{armeabi-v7a,arm64-v8a,x86,x86_64}
+   mkdir -p YourApp/app/src/main/jniLibs/{armeabi-v7a,arm64-v8a,x86_64}
    cp output/arm32/libwallet_merged.a YourApp/app/src/main/jniLibs/armeabi-v7a/
    cp output/arm64/libwallet_merged.a YourApp/app/src/main/jniLibs/arm64-v8a/
-   cp output/x86/libwallet_merged.a YourApp/app/src/main/jniLibs/x86/
    cp output/x86_64/libwallet_merged.a YourApp/app/src/main/jniLibs/x86_64/
    ```
 
@@ -146,16 +130,11 @@ du -h output/arm32/libwallet_merged.a
 # List first 20 object files
 ar t output/arm32/libwallet_merged.a | head -20
 
-# Check for wallet symbols
-nm output/arm32/libwallet_merged.a | grep -i "wallet" | head -10
-```
-
 ---
 
 ## ⚠️ Common Issues & Solutions
 
 ### Issue: "No such file or directory" when extracting
-**Solution**: Image doesn't have the library. Rebuild with updated Dockerfile:
 ```bash
 docker build -t monero-android32 -f android32.Dockerfile .
 ```
@@ -169,14 +148,6 @@ docker build -t monero-android32 -f android32.Dockerfile .
 docker system prune -a
 ```
 
-### Issue: Container exits immediately
-**Solution**: Remove `-it` flag and add explicit command:
-```bash
-docker run --rm \
-  -v "$(pwd)/output/arm32:/host-output" \
-  monero-android32:latest \
-  bash -c "cp /work/out/libwallet_merged.a /host-output/"
-```
 
 ---
 
@@ -188,7 +159,6 @@ Expected sizes for each architecture:
 |-------------|-----------|------------|
 | ARM 32-bit  | ~108 MB   | 45-60 min  |
 | ARM 64-bit  | ~110 MB   | 45-60 min  |
-| x86         | ~115 MB   | 45-60 min  |
 | x86_64      | ~117 MB   | 45-60 min  |
 
 ---
@@ -197,7 +167,6 @@ Expected sizes for each architecture:
 
 You're done when:
 
-- [ ] `output/arm32/libwallet_merged.a` exists and is ~108MB
 - [ ] `file` command shows "current ar archive"
 - [ ] `ar t` command lists object files
 - [ ] Library is ARM (check with `file` command)
