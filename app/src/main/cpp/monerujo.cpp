@@ -17,6 +17,7 @@
 #include <inttypes.h>
 #include "monerujo.h"
 #include "wallet2_api.h"
+#include <cassert>
 
 #ifdef __cplusplus
 extern "C"
@@ -34,7 +35,6 @@ extern "C"
 static JavaVM *cachedJVM;
 static jclass class_ArrayList;
 static jclass class_WalletListener;
-static jclass class_CoinsInfo;
 static jclass class_TransactionInfo;
 static jclass class_Transfer;
 static jclass class_Ledger;
@@ -55,8 +55,6 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
 
     class_ArrayList = static_cast<jclass>(jenv->NewGlobalRef(
             jenv->FindClass("java/util/ArrayList")));
-    class_CoinsInfo = static_cast<jclass>(jenv->NewGlobalRef(
-            jenv->FindClass("com/m2049r/xmrwallet/model/CoinsInfo")));
     class_TransactionInfo = static_cast<jclass>(jenv->NewGlobalRef(
             jenv->FindClass("com/m2049r/xmrwallet/model/TransactionInfo")));
     class_Transfer = static_cast<jclass>(jenv->NewGlobalRef(
@@ -1126,12 +1124,6 @@ Java_com_m2049r_xmrwallet_model_Wallet_getHistoryJ(JNIEnv *env, jobject instance
 //virtual AddressBook * addressBook() const = 0;
 
 JNIEXPORT jlong JNICALL
-Java_com_m2049r_xmrwallet_model_Wallet_getCoinsJ(JNIEnv *env, jobject instance) {
-    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
-    return reinterpret_cast<jlong>(wallet->coins());
-}
-
-JNIEXPORT jlong JNICALL
 Java_com_m2049r_xmrwallet_model_Wallet_setListenerJ(JNIEnv *env, jobject instance,
                                                     jobject javaListener) {
     Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
@@ -1277,19 +1269,6 @@ Java_com_m2049r_xmrwallet_model_Wallet_addSubaddress(JNIEnv *env, jobject instan
     env->ReleaseStringUTFChars(label, _label);
 }
 
-/*JNIEXPORT jstring JNICALL
-Java_com_m2049r_xmrwallet_model_Wallet_getLastSubaddress(JNIEnv *env, jobject instance,
-                                                         jint accountIndex) {
-
-    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
-    size_t num = wallet->numSubaddresses(accountIndex);
-    //wallet->subaddress()->getAll()[num]->getAddress().c_str()
-    Monero::Subaddress *s = wallet->subaddress();
-    s->refresh(accountIndex);
-    std::vector<Monero::SubaddressRow *> v = s->getAll();
-    return env->NewStringUTF(v[num - 1]->getAddress().c_str());
-}
-*/
 //virtual std::string signMessage(const std::string &message) = 0;
 //virtual bool verifySignedMessage(const std::string &message, const std::string &addres, const std::string &signature) const = 0;
 
@@ -1297,7 +1276,7 @@ Java_com_m2049r_xmrwallet_model_Wallet_getLastSubaddress(JNIEnv *env, jobject in
 //virtual bool rescanSpent() = 0;
 
 
-// TransactionHistoryr
+// TransactionHistory
 JNIEXPORT jint JNICALL
 Java_com_m2049r_xmrwallet_model_TransactionHistory_getCount(JNIEnv *env, jobject instance) {
     Monero::TransactionHistory *history = getHandle<Monero::TransactionHistory>(env,
@@ -1368,59 +1347,6 @@ jobject newTransactionInfo(JNIEnv *env, Monero::TransactionInfo *info) {
 
 #include <stdio.h>
 #include <stdlib.h>
-
-// Coins
-
-jobject newCoinsInfo(JNIEnv *env, Monero::CoinsInfo *info) {
-    jstring _hash = env->NewStringUTF(info->hash().c_str());
-
-    jmethodID c = env->GetMethodID(class_CoinsInfo, "<init>", "(IIJJLjava/lang/String;ZZJZ)V");
-    jobject result = env->NewObject(class_CoinsInfo, c,
-                                    static_cast<jint> (info->subaddrAccount()),
-                                    static_cast<jint> (info->subaddrIndex()),
-                                    static_cast<jlong> (info->amount()),
-                                    static_cast<jlong> (info->blockHeight()),
-                                    _hash,
-                                    info->spent(),
-                                    info->frozen(),
-                                    static_cast<jlong> (info->unlockTime()),
-                                    info->unlocked());
-    env->DeleteLocalRef(_hash);
-    return result;
-}
-
-jobject coinsInfoArrayList(JNIEnv *env, const std::vector<Monero::CoinsInfo *> &vector,
-                           uint32_t accountIndex, bool unspentOnly) {
-
-    jmethodID java_util_ArrayList_ = env->GetMethodID(class_ArrayList, "<init>", "(I)V");
-    jmethodID java_util_ArrayList_add = env->GetMethodID(class_ArrayList, "add",
-                                                         "(Ljava/lang/Object;)Z");
-
-    jobject arrayList = env->NewObject(class_ArrayList, java_util_ArrayList_,
-                                       static_cast<jint> (vector.size()));
-    for (Monero::CoinsInfo *s: vector) {
-        if (s->subaddrAccount() != accountIndex) continue;
-        if (s->spent() && unspentOnly) continue;
-        jobject info = newCoinsInfo(env, s);
-        env->CallBooleanMethod(arrayList, java_util_ArrayList_add, info);
-        env->DeleteLocalRef(info);
-    }
-    return arrayList;
-}
-
-JNIEXPORT jint JNICALL
-Java_com_m2049r_xmrwallet_model_Coins_getCount(JNIEnv *env, jobject instance) {
-    Monero::Coins *coins = getHandle<Monero::Coins>(env, instance);
-    return coins->count();
-}
-
-JNIEXPORT jobject JNICALL
-Java_com_m2049r_xmrwallet_model_Coins_refresh(JNIEnv *env, jobject instance, jint accountIndex,
-                                              jboolean unspentOnly) {
-    Monero::Coins *coins = getHandle<Monero::Coins>(env, instance);
-    coins->refresh();
-    return coinsInfoArrayList(env, coins->getAll(), (uint32_t) accountIndex, unspentOnly);
-}
 
 jobject
 transactionInfoArrayList(JNIEnv *env, const std::vector<Monero::TransactionInfo *> &vector,

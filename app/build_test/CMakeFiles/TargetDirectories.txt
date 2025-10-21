@@ -1,0 +1,3 @@
+/home/niyid/git/xmrwallet/app/build_test/CMakeFiles/monerujo.dir
+/home/niyid/git/xmrwallet/app/build_test/CMakeFiles/edit_cache.dir
+/home/niyid/git/xmrwallet/app/build_test/CMakeFiles/rebuild_cache.dir

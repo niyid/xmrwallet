@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.4.1)
+project(monerujo)
+message(STATUS ABI_INFO  = ${ANDROID_ABI})
+
+add_library( monerujo
+             SHARED
+             src/main/cpp/monerujo.cpp )
+
+set(EXTERNAL_LIBS_DIR ${CMAKE_SOURCE_DIR}/../external-libs)
+
+############
+# libsodium
+############
+
+add_library(sodium STATIC IMPORTED)
+set_target_properties(sodium PROPERTIES IMPORTED_LOCATION
+        ${EXTERNAL_LIBS_DIR}/output/${ANDROID_ABI}/lib/libsodium.a)
+
+############
+# OpenSSL
+############
+
+add_library(crypto STATIC IMPORTED)
+set_target_properties(crypto PROPERTIES IMPORTED_LOCATION
+        ${EXTERNAL_LIBS_DIR}/output/${ANDROID_ABI}/lib/libcrypto.a)
+
+add_library(ssl STATIC IMPORTED)
+set_target_properties(ssl PROPERTIES IMPORTED_LOCATION
+    ${EXTERNAL_LIBS_DIR}/output/${ANDROID_ABI}/lib/libssl.a)
+
+# ... (similar fixes for all other libraries)
+
+include_directories( ${EXTERNAL_LIBS_DIR}/include ${EXTERNAL_LIBS_DIR}/include/wallet )
+
+message(STATUS EXTERNAL_LIBS_DIR :  ${EXTERNAL_LIBS_DIR})
+
+if(${ANDROID_ABI} STREQUAL "x86_64")
+    set(EXTRA_LIBS "wallet-crypto")
+else()
+    set(EXTRA_LIBS "")
+endif()
+
+# ... (rest of target_link_libraries)

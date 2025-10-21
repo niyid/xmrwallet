@@ -494,7 +494,18 @@ RUN set -eux; \
     cp ${BUILD_DIR}/src/device/libdevice.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/src/checkpoints/libcheckpoints.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/src/blockchain_db/libblockchain_db.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
-    \
+    # Additional Monero libraries
+	cp ${BUILD_DIR}/external/db_drivers/liblmdb/liblmdb.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/blocks/libblocks.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/device_trezor/libdevice_trezor.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/multisig/libmultisig.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/version/libversion.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/net/libnet.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/hardforks/libhardforks.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/external/randomx/librandomx.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/rpc/librpc_base.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/wallet/libwallet-crypto.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
+	cp ${BUILD_DIR}/src/cryptonote_basic/libcryptonote_format_utils_basic.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \    \
     # External libraries
     cp ${BUILD_DIR}/external/easylogging++/libeasylogging.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/contrib/epee/src/libepee.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
