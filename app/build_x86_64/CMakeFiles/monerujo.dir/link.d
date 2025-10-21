@@ -5,19 +5,28 @@ libmonerujo.so: \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libwallet.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcryptonote_core.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcryptonote_basic.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcryptonote_format_utils_basic.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libmnemonics.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libringct.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libringct_basic.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libnet.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcommon.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcncrypto.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libblockchain_db.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/liblmdb.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libeasylogging.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libunbound.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libepee.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libblocks.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcheckpoints.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libdevice.a \
- /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libzmq.a \
- /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libexpat.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libdevice_trezor.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libmultisig.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libversion.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/librandomx.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libhardforks.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/librpc_base.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libwallet-crypto.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_chrono.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_date_time.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_filesystem.a \
@@ -26,6 +35,7 @@ libmonerujo.so: \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_serialization.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_system.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_thread.a \
+ /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_wserialization.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libssl.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcrypto.a \
  /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libsodium.a \
@@ -53,11 +63,15 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcryptonote_basic.a:
 
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcryptonote_format_utils_basic.a:
+
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libmnemonics.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libringct.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libringct_basic.a:
+
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libnet.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcommon.a:
 
@@ -65,19 +79,33 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libblockchain_db.a:
 
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/liblmdb.a:
+
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libeasylogging.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libunbound.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libepee.a:
 
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libblocks.a:
+
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libcheckpoints.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libdevice.a:
 
-/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libzmq.a:
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libdevice_trezor.a:
 
-/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libexpat.a:
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libmultisig.a:
+
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libversion.a:
+
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/librandomx.a:
+
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libhardforks.a:
+
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/librpc_base.a:
+
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libwallet-crypto.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_chrono.a:
 
@@ -94,6 +122,8 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o:
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_system.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_thread.a:
+
+/home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libboost_wserialization.a:
 
 /home/niyid/git/xmrwallet/external-libs/output/x86_64/lib/libssl.a:
 

@@ -483,11 +483,11 @@ RUN set -eux; \
     mkdir -p ${WORK_DIR}/output/include/monero; \
     \
     echo "=== Copying Monero wallet libraries ==="; \
-    # Core wallet libraries
-    cp ${BUILD_DIR}/lib/libwallet_api.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] libwallet_api.a missing"; \
-    cp ${BUILD_DIR}/lib/libwallet.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] libwallet.a missing"; \
+    # Core wallet libraries 
+    cp ${BUILD_DIR}/lib/libwallet_api.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] libwallet_api.a not found"; \
+    cp ${BUILD_DIR}/lib/libwallet.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] libwallet.a not found"; \
     \
-    # Monero core libraries
+    # Monero core libraries 
     cp ${BUILD_DIR}/src/cryptonote_core/libcryptonote_core.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/src/cryptonote_basic/libcryptonote_basic.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/src/cryptonote_protocol/libcryptonote_protocol.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
@@ -499,20 +499,28 @@ RUN set -eux; \
     cp ${BUILD_DIR}/src/device/libdevice.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/src/checkpoints/libcheckpoints.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/src/blockchain_db/libblockchain_db.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-    # Additional Monero libraries \
-	cp ${BUILD_DIR}/external/db_drivers/liblmdb/liblmdb.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/blocks/libblocks.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/device_trezor/libdevice_trezor.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/multisig/libmultisig.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/version/libversion.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/net/libnet.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/hardforks/libhardforks.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/external/randomx/librandomx.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/rpc/librpc_base.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/wallet/libwallet-crypto.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
-	cp ${BUILD_DIR}/src/cryptonote_basic/libcryptonote_format_utils_basic.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
     \
-    # External libraries
+    # Additional Monero libraries 
+    cp ${BUILD_DIR}/external/db_drivers/liblmdb/liblmdb.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/blocks/libblocks.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/device_trezor/libdevice_trezor.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/multisig/libmultisig.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/net/libnet.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/hardforks/libhardforks.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/rpc/librpc_base.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/cryptonote_basic/libcryptonote_format_utils_basic.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
+    cp ${BUILD_DIR}/src/libversion.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] libversion.a missing"; \
+    \
+    # Critical missing libraries 
+    echo "=== Copying additional critical libraries ==="; \
+    # RandomX library 
+    cp ${BUILD_DIR}/external/randomx/librandomx.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] librandomx.a not found"; \
+    # Wallet crypto library 
+    cp ${BUILD_DIR}/src/crypto/wallet/libwallet-crypto.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] libwallet-crypto.a not found"; \
+    # Character set library (from external libs) 
+    find ${BUILD_DIR}/external -name "libcharset.a" -exec cp {} ${WORK_DIR}/output/armeabi-v7a/lib/ \; 2>/dev/null || echo "[WARN] libcharset.a not found"; \
+    \
+    # External libraries 
     cp ${BUILD_DIR}/external/easylogging++/libeasylogging.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
     cp ${BUILD_DIR}/contrib/epee/src/libepee.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || true; \
     \
@@ -534,6 +542,7 @@ RUN set -eux; \
     cp ${BOOST_ROOT}/lib/libboost_regex.a ${WORK_DIR}/output/armeabi-v7a/lib/; \
     cp ${BOOST_ROOT}/lib/libboost_serialization.a ${WORK_DIR}/output/armeabi-v7a/lib/; \
     cp ${BOOST_ROOT}/lib/libboost_program_options.a ${WORK_DIR}/output/armeabi-v7a/lib/; \
+    cp ${BOOST_ROOT}/lib/libboost_wserialization.a ${WORK_DIR}/output/armeabi-v7a/lib/ 2>/dev/null || echo "[WARN] libboost_wserialization.a missing"; \
     \
     echo "=== Copying header files ==="; \
     # Copy wallet API headers
@@ -592,7 +601,7 @@ RUN set -eux; \
     du -sh ${WORK_DIR}/output; \
     \
     echo "=== Verifying critical libraries ==="; \
-    for lib in libwallet_api.a libwallet.a libcryptonote_core.a libssl.a libcrypto.a; do \
+    for lib in libwallet_api.a libwallet.a libcryptonote_core.a libssl.a libcrypto.a librandomx.a libwallet-crypto.a; do \
         if [ -f ${WORK_DIR}/output/armeabi-v7a/lib/$lib ]; then \
             echo "[OK] $lib - $(ls -lh ${WORK_DIR}/output/armeabi-v7a/lib/$lib | awk '{print $5}')"; \
         else \

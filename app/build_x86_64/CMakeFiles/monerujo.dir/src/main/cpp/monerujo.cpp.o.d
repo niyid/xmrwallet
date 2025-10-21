@@ -29,15 +29,6 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o: \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_nullptr_t.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_max_align_t.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_offsetof.h \
-  /home/niyid/git/xmrwallet/app/src/main/cpp/monerujo.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/jni.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/stdarg.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_header_macro.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg___gnuc_va_list.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_va_list.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_va_arg.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg___va_copy.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_va_copy.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/string \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/max.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/comp.h \
@@ -217,6 +208,13 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o: \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/x86_64-linux-android/asm/posix_types_64.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/posix_types.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/pthread_types.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/stdarg.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_header_macro.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg___gnuc_va_list.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_va_list.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_va_arg.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg___va_copy.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stdarg_va_copy.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/xlocale.h \
@@ -586,7 +584,6 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o: \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/pstl.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/sample.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/bit \
-  /home/niyid/git/xmrwallet/app/../external-libs/output/include/wallet/wallet2_api.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/vector \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/lexicographical_compare_three_way.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/three_way_comp_ref_type.h \
@@ -659,6 +656,11 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o: \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__locale_dir/locale_base_api/bsd_locale_fallbacks.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__locale_dir/locale_base_api/locale_guard.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdarg \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cassert \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
+  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/jni.h \
+  /home/niyid/git/xmrwallet/app/src/main/cpp/monerujo.h \
+  /home/niyid/git/xmrwallet/app/../external-libs/output/include/wallet/wallet2_api.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/list \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/binary_negate.h \
@@ -702,8 +704,6 @@ CMakeFiles/monerujo.dir/src/main/cpp/monerujo.cpp.o: \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__fwd/stack.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/print \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/unistd.h \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cassert \
-  /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/log.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/stdbool.h

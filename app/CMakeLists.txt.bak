@@ -1,0 +1,65 @@
+cmake_minimum_required(VERSION 3.10.2)
+
+project(monerujo)
+
+# Add external libs include directories
+set(EXTERNAL_INCLUDE_DIR "${EXTERNAL_LIBS_DIR}/include")
+if(EXISTS "${EXTERNAL_INCLUDE_DIR}")
+    include_directories(${EXTERNAL_INCLUDE_DIR})
+    message(STATUS "Added external include directory: ${EXTERNAL_INCLUDE_DIR}")
+    
+    # Also add the wallet subdirectory specifically for wallet2_api.h
+    set(EXTERNAL_WALLET_INCLUDE_DIR "${EXTERNAL_INCLUDE_DIR}/wallet")
+    if(EXISTS "${EXTERNAL_WALLET_INCLUDE_DIR}")
+        include_directories(${EXTERNAL_WALLET_INCLUDE_DIR})
+        message(STATUS "Added wallet include directory: ${EXTERNAL_WALLET_INCLUDE_DIR}")
+    else()
+        message(WARNING "Wallet include directory not found: ${EXTERNAL_WALLET_INCLUDE_DIR}")
+    endif()
+else()
+    message(WARNING "External include directory not found: ${EXTERNAL_INCLUDE_DIR}")
+endif()
+
+# Print ABI info for debugging
+message(STATUS "ABI_INFO=${ANDROID_ABI}")
+message(STATUS "EXTERNAL_LIBS_DIR:${EXTERNAL_LIBS_DIR}")
+
+# Set library directory per ABI
+set(EXTERNAL_LIBS_ABI_DIR "${EXTERNAL_LIBS_DIR}/${ANDROID_ABI}/lib")
+message(STATUS "EXTERNAL_LIBS_ABI_DIR:${EXTERNAL_LIBS_ABI_DIR}")
+
+# Verify library directory exists
+if(NOT EXISTS "${EXTERNAL_LIBS_ABI_DIR}")
+    message(FATAL_ERROR "Library directory does not exist: ${EXTERNAL_LIBS_ABI_DIR}")
+endif()
+
+# Verify required libraries exist
+set(REQUIRED_LIBS wallet_api wallet-crypto)
+foreach(lib ${REQUIRED_LIBS})
+    set(LIB_PATH "${EXTERNAL_LIBS_ABI_DIR}/lib${lib}.a")
+    if(NOT EXISTS "${LIB_PATH}")
+        message(WARNING "Required library not found: ${LIB_PATH}")
+    else()
+        message(STATUS "Found library: ${LIB_PATH}")
+    endif()
+endforeach()
+
+# Add native library
+add_library(
+    monerujo
+    SHARED
+    src/main/cpp/monerujo.cpp
+)
+
+# Find and link required libraries
+find_library(
+    log-lib
+    log
+)
+
+target_link_libraries(
+    monerujo
+    ${log-lib}
+    "${EXTERNAL_LIBS_ABI_DIR}/libwallet_api.a"
+    "${EXTERNAL_LIBS_ABI_DIR}/libwallet-crypto.a"
+)

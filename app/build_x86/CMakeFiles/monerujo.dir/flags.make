@@ -4,7 +4,7 @@
 # compile CXX with /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++
 CXX_DEFINES = -Dmonerujo_EXPORTS
 
-CXX_INCLUDES = -I/home/niyid/git/xmrwallet/app/../external-libs/output/include -I/home/niyid/git/xmrwallet/app/../external-libs/output/include/wallet
+CXX_INCLUDES = -I/home/niyid/git/xmrwallet/app/../external-libs/output/include
 
 CXX_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIC
 

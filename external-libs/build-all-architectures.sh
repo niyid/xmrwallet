@@ -53,41 +53,48 @@ build_arch() {
     
     # Build Docker image
     echo "🔨 Building Docker image: ${image_name}"
-    docker build -t "${image_name}" -f "${dockerfile}" .
-    
-    if [ $? -ne 0 ]; then
+    if ! docker build -t "${image_name}" -f "${dockerfile}" .; then
         echo "❌ Docker build failed for $arch"
         return 1
     fi
     
     # Extract artifacts using the built-in extraction script
     echo "📦 Extracting artifacts..."
-    docker run --rm \
+    if ! docker run --rm \
         -v "${SCRIPT_DIR}/output:/host-output" \
         "${image_name}" \
-        /extract-libs.sh /host-output
-    
-    if [ $? -ne 0 ]; then
+        /extract-libs.sh /host-output; then
         echo "❌ Artifact extraction failed for $arch"
         return 1
     fi
+    
+    echo "✅ $arch build completed successfully"
+    return 0
 }
 
 # Build requested architecture(s)
 BUILD_FAILED=0
+SUCCESSFUL_BUILDS=0
+TOTAL_BUILDS=0
 
 if [ "$ARCH_TO_BUILD" = "all" ]; then
     echo "Building all architectures: arm32, arm64, x86_64"
     echo ""
     
     for arch in arm32 arm64 x86_64; do
-        if ! build_arch "$arch"; then
+        TOTAL_BUILDS=$((TOTAL_BUILDS + 1))
+        if build_arch "$arch"; then
+            SUCCESSFUL_BUILDS=$((SUCCESSFUL_BUILDS + 1))
+        else
             echo "⚠️  $arch build failed, continuing..."
             BUILD_FAILED=1
         fi
     done
 else
-    if ! build_arch "$ARCH_TO_BUILD"; then
+    TOTAL_BUILDS=1
+    if build_arch "$ARCH_TO_BUILD"; then
+        SUCCESSFUL_BUILDS=1
+    else
         BUILD_FAILED=1
     fi
 fi
@@ -98,11 +105,7 @@ echo "Build Summary"
 echo "======================================================"
 echo ""
 
-# Check all ABIs and display summary
-SUCCESSFUL_BUILDS=0
-TOTAL_BUILDS=0
-
-echo ""
+# Display summary
 echo "Success rate: $SUCCESSFUL_BUILDS/$TOTAL_BUILDS architectures built"
 echo ""
 
@@ -110,16 +113,21 @@ echo ""
 if [ $SUCCESSFUL_BUILDS -gt 0 ]; then
     echo "Output structure:"
     if command -v tree &> /dev/null; then
-        tree -L 2 "${SCRIPT_DIR}/output/" 2>/dev/null || true
+        tree -L 2 "${SCRIPT_DIR}/output/" 2>/dev/null || find "${SCRIPT_DIR}/output/" -type d | head -10
     else
         echo ""
-        find "${SCRIPT_DIR}/output/" -type f -exec ls -lh {} \;
+        find "${SCRIPT_DIR}/output/" -type d | head -10
+        echo ""
+        echo "Built libraries:"
+        find "${SCRIPT_DIR}/output/" -name "*.a" -type f | head -20
     fi
     echo ""
     echo "All artifacts in: ${SCRIPT_DIR}/output/"
     echo ""
-    echo "To use in Android project, copy the .so files to:"
-    echo "  app/src/main/jniLibs/<abi>/libmonerujo.so"
+    echo "To use in Android project, copy the .a files to:"
+    echo "  app/src/main/jniLibs/<abi>/"
+else
+    echo "❌ No architectures built successfully"
 fi
 
 # Exit with error if any build failed
