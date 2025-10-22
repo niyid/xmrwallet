@@ -40,3 +40,16 @@ external-libs/output/
 # External Libraries - specific build outputs
 external-libs/build-armeabi-v7a/
 external-libs/build-x86_64/
+
+# CMake build directories
+app/build_*/
+app/CMakeFiles/
+app/CMakeCache.txt
+app/cmake_install.cmake
+app/Makefile
+app/.cmake/
+app/*.cmake
+app/CMakeConfigureLog.yaml
+
+# Project-wide build directories
+/build/
