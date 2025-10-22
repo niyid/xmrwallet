@@ -11,6 +11,12 @@ TOOLCHAIN_FILE="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
 echo "Using NDK: $ANDROID_NDK_HOME"
 echo "Using toolchain: $TOOLCHAIN_FILE"
 
+# Create build directory at project root and jniLibs in app
+BUILD_DIR="../build"
+JNI_LIBS_DIR="src/main/jniLibs"
+mkdir -p $BUILD_DIR
+mkdir -p $JNI_LIBS_DIR
+
 # Common ABI directories to check
 POSSIBLE_ABI_DIRS=("arm64-v8a" "armeabi-v7a" "x86_64")
 
@@ -27,14 +33,17 @@ for abi in "${POSSIBLE_ABI_DIRS[@]}"; do
         
         echo "Building for $abi..."
         
-        # Clean previous build
-        rm -rf build_$abi
+        # Clean previous build (now in project root build directory)
+        rm -rf "$BUILD_DIR/build_$abi"
+        
+        # Create ABI-specific jniLibs directory
+        mkdir -p "$JNI_LIBS_DIR/$abi"
         
         # For ARM64, use specific linker flags to handle large code sections
         if [ "$abi" = "arm64-v8a" ]; then
             echo "Applying ARM64-specific build configuration..."
             
-            cmake -B build_$abi \
+            cmake -B "$BUILD_DIR/build_$abi" \
                 -DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN_FILE" \
                 -DANDROID_ABI=$abi \
                 -DANDROID_PLATFORM=android-33 \
@@ -43,21 +52,25 @@ for abi in "${POSSIBLE_ABI_DIRS[@]}"; do
                 -DCMAKE_CXX_FLAGS="-Wl,-Bsymbolic -fPIC" \
                 -DCMAKE_SHARED_LINKER_FLAGS="-Wl,--gc-sections -Wl,--icf=all"
         else
-            cmake -B build_$abi \
+            cmake -B "$BUILD_DIR/build_$abi" \
                 -DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN_FILE" \
                 -DANDROID_ABI=$abi \
                 -DANDROID_PLATFORM=android-33 \
                 -DEXTERNAL_LIBS_DIR=../external-libs/output
         fi
         
-        cmake --build build_$abi --parallel $(nproc)
+        cmake --build "$BUILD_DIR/build_$abi" --parallel $(nproc)
         
-        # Check if the build was successful
-        if [ -f "build_$abi/libmonerujo.so" ]; then
-            echo "✅ SUCCESS: Built build_$abi/libmonerujo.so"
-            ls -lh "build_$abi/libmonerujo.so"
+        # Check if the build was successful and copy to jniLibs
+        if [ -f "$BUILD_DIR/build_$abi/libmonerujo.so" ]; then
+            echo "✅ SUCCESS: Built $BUILD_DIR/build_$abi/libmonerujo.so"
+            ls -lh "$BUILD_DIR/build_$abi/libmonerujo.so"
+            
+            # Copy to jniLibs directory
+            cp "$BUILD_DIR/build_$abi/libmonerujo.so" "$JNI_LIBS_DIR/$abi/"
+            echo "✅ Copied libmonerujo.so to $JNI_LIBS_DIR/$abi/"
         else
-            echo "❌ FAILED: build_$abi/libmonerujo.so not found"
+            echo "❌ FAILED: $BUILD_DIR/build_$abi/libmonerujo.so not found"
         fi
         
         echo "Completed $abi"
@@ -66,3 +79,7 @@ for abi in "${POSSIBLE_ABI_DIRS[@]}"; do
         echo "No directory found for ABI: $abi in output directory"
     fi
 done
+
+# Final check of all built libraries in jniLibs
+echo "=== Final build results in jniLibs ==="
+find "$JNI_LIBS_DIR" -name "libmonerujo.so" -type f -ls
