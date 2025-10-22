@@ -6,5 +6,5 @@ CXX_DEFINES = -Dmonerujo_EXPORTS
 
 CXX_INCLUDES = -I/home/niyid/git/xmrwallet/app/../external-libs/include -I/home/niyid/git/xmrwallet/app/../external-libs/output/include -I/home/niyid/git/xmrwallet/app/../external-libs/output/include/wallet -I/home/niyid/git/xmrwallet/app/../external-libs/output/include/monero -I/home/niyid/git/xmrwallet/app/../external-libs/output/include/monero/wallet -I/home/niyid/git/xmrwallet/app/../external-libs/output/include/monero/wallet/api
 
-CXX_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "-Wl,-z,notext" -fPIC
+CXX_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wl,-Bsymbolic -fPIC -fPIC
 

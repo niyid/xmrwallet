@@ -1,5 +1,5 @@
 # ============================================================
-# Monero Android (arm64-v8a) build image
+# Monero Android (arm64-v8a) build image - WITH RANDOMX FIX
 # ============================================================
 FROM debian:bullseye
 
@@ -123,6 +123,46 @@ RUN set -eux; \
     echo "Current version:"; \
     git describe --tags --always 2>/dev/null || echo "No git tags available"; \
     echo "================================="
+
+# ------------------------------------------------------------
+# CRITICAL: Patch RandomX for ARM64 Android to fix relocation errors
+# ------------------------------------------------------------
+RUN set -eux; \
+    echo "========================================"; \
+    echo "[PATCH] Fixing RandomX for ARM64 Android"; \
+    echo "========================================"; \
+    RANDOMX_CMAKE="${WORK_DIR}/monero/external/randomx/CMakeLists.txt"; \
+    \
+    if [ ! -f "$RANDOMX_CMAKE" ]; then \
+        echo "[ERROR] RandomX CMakeLists.txt not found at: $RANDOMX_CMAKE"; \
+        exit 1; \
+    fi; \
+    \
+    # Backup original
+    cp "$RANDOMX_CMAKE" "${RANDOMX_CMAKE}.bak"; \
+    \
+    # Add ARM64 Android-specific compiler flags after project() declaration
+    # This fixes the "relocation R_AARCH64_CONDBR19 out of range" error
+    sed -i '/^project(randomx)/a \
+\# ARM64 Android fixes for branch relocation issues\
+if(CMAKE_SYSTEM_NAME STREQUAL "Android" AND CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")\
+  message(STATUS "==========================================")\
+  message(STATUS "Applying ARM64 Android fixes to RandomX")\
+  message(STATUS "==========================================")\
+  \# Split code into sections to reduce branch distances\
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")\
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")\
+  \# Help assembler with branch distance issues\
+  set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -Wa,--no-relax")\
+  \# Ensure position-independent code\
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)\
+  message(STATUS "RandomX ARM64 Android flags applied")\
+endif()' "$RANDOMX_CMAKE"; \
+    \
+    echo "[OK] RandomX patched successfully"; \
+    echo "Showing patched section:"; \
+    head -50 "$RANDOMX_CMAKE" | tail -20; \
+    echo "========================================"
                     
 # ------------------------------------------------------------
 # OpenSSL (android-arm64)
@@ -517,7 +557,7 @@ RUN set -eux; \
     \
     # External libraries 
     cp ${BUILD_DIR}/external/easylogging++/libeasylogging.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
-    cp ${BUILD_DIR}/contrib/epee/src/libepee.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true \ 
+    cp ${BUILD_DIR}/contrib/epee/src/libepee.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || true; \
     \
     echo "=== Copying dependency libraries ==="; \
     # Copy all dependency static libraries
@@ -537,7 +577,7 @@ RUN set -eux; \
     cp ${BOOST_ROOT}/lib/libboost_regex.a ${WORK_DIR}/output/arm64-v8a/lib/; \
     cp ${BOOST_ROOT}/lib/libboost_serialization.a ${WORK_DIR}/output/arm64-v8a/lib/; \
     cp ${BOOST_ROOT}/lib/libboost_program_options.a ${WORK_DIR}/output/arm64-v8a/lib/; \
-cp ${BOOST_ROOT}/lib/libboost_wserialization.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || echo "[WARN] libboost_wserialization.a missing"; \
+    cp ${BOOST_ROOT}/lib/libboost_wserialization.a ${WORK_DIR}/output/arm64-v8a/lib/ 2>/dev/null || echo "[WARN] libboost_wserialization.a missing"; \
     \
     echo "=== Copying header files ==="; \
     # Copy wallet API headers
@@ -550,12 +590,13 @@ cp ${BOOST_ROOT}/lib/libboost_wserialization.a ${WORK_DIR}/output/arm64-v8a/lib/
     \
     echo "=== Creating build info file ==="; \
     cat > ${WORK_DIR}/output/BUILD_INFO.txt << 'EOF'
-Monero Android ARM64 (arm64-v8a) Build
-========================================
+Monero Android ARM64 (arm64-v8a) Build - WITH RANDOMX FIX
+==========================================================
 
 Architecture: arm64-v8a (64-bit ARM)
 API Level: 33
 NDK: r29
+RandomX Fix: Applied (branch relocation fix)
 Build Date: $(date)
 
 Output Structure:
@@ -596,19 +637,18 @@ RUN set -eux; \
     du -sh ${WORK_DIR}/output; \
     \
     echo "=== Verifying critical libraries ==="; \
-    for lib in libwallet_api.a libwallet.a libcryptonote_core.a libssl.a libcrypto.a; do \
+    for lib in libwallet_api.a libwallet.a libcryptonote_core.a librandomx.a libssl.a libcrypto.a; do \
         if [ -f ${WORK_DIR}/output/arm64-v8a/lib/$lib ]; then \
             echo "[OK] $lib - $(ls -lh ${WORK_DIR}/output/arm64-v8a/lib/$lib | awk '{print $5}')"; \
         else \
             echo "[MISSING] $lib"; \
         fi; \
     done; \
-
     \
     echo ""; \
     echo "========================================"; \
-    echo "Build complete! Artifacts ready in:"; \
-    echo "${WORK_DIR}/output"; \
+    echo "Build complete with RandomX fix!"; \
+    echo "Artifacts ready in: ${WORK_DIR}/output"; \
     echo "========================================"; \
     echo ""; \
     echo "To extract artifacts, run:"; \

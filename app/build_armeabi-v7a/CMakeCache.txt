@@ -234,9 +234,6 @@ CMAKE_TOOLCHAIN_FILE:FILEPATH=/mnt/android-sdk/ndk/29.0.13113456/build/cmake/and
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //No help, variable specified on the command line.
-EXTERNAL_INCLUDE_DIR:UNINITIALIZED=../external-libs/output/include
-
-//No help, variable specified on the command line.
 EXTERNAL_LIBS_DIR:UNINITIALIZED=../external-libs/output
 
 //Path to a library.
