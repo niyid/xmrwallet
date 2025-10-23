@@ -49,7 +49,7 @@ jclass class_Transfer;
 jclass class_Ledger;
 jclass class_WalletStatus;
 jclass class_BluetoothService;
-// REMOVED: jclass class_SidekickService; (Sidekick disabled)
+jclass class_SidekickService;
 
 // RAII wrapper for JNI strings
 class JNIStringGuard {
@@ -244,7 +244,8 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved) {
             jenv->FindClass("com/m2049r/xmrwallet/model/Wallet$Status")));
     class_BluetoothService = static_cast<jclass>(jenv->NewGlobalRef(
             jenv->FindClass("com/m2049r/xmrwallet/service/BluetoothService")));
-    // REMOVED: class_SidekickService initialization (Sidekick disabled)
+    class_SidekickService = static_cast<jclass>(jenv->NewGlobalRef(
+            jenv->FindClass("com/m2049r/xmrwallet/service/SidekickService")));
     return JNI_VERSION_1_6;
 }
 
@@ -1878,11 +1879,22 @@ int BtExchange(unsigned char *request, unsigned int request_len,
     }
 }
 
-// MODIFIED: ConfirmTransfers function (Sidekick disabled)
 bool ConfirmTransfers(const char *transfers) {
-    // Sidekick functionality disabled - auto-confirm transfers
-    LOGD("ConfirmTransfers: auto-confirming (Sidekick disabled)");
-    return true;
+    JNIEnv *jenv;
+    int envStat = attachJVM(&jenv);
+    if (envStat == JNI_ERR) return false;
+
+    jmethodID confirmMethod = jenv->GetStaticMethodID(class_SidekickService, "ConfirmTransfers", "(Ljava/lang/String;)Z");
+    if (confirmMethod == nullptr) {
+        detachJVM(jenv, envStat);
+        return false;
+    }
+    
+    jstring _transfers = jenv->NewStringUTF(transfers);
+    auto confirmed = jenv->CallStaticBooleanMethod(class_SidekickService, confirmMethod, _transfers);
+    jenv->DeleteLocalRef(_transfers);
+    detachJVM(jenv, envStat);
+    return confirmed;
 }
 
 #ifdef __cplusplus
