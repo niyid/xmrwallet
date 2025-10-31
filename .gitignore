@@ -86,3 +86,6 @@ app/prod*/
 .settings/
 .idea/
 
+# Allow Gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
