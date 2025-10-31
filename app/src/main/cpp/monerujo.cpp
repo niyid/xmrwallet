@@ -1562,6 +1562,228 @@ Java_com_m2049r_xmrwallet_model_Wallet_addSubaddress(JNIEnv *env, jobject instan
     }
 }
 
+// Add these multisig functions to monerujo.cpp following the existing pattern
+// Corrected based on actual wallet2_api.h interface from Monero v0.18+
+
+/**********************************/
+/********* Multisig Support *******/
+/**********************************/
+
+// Check if wallet is multisig
+JNIEXPORT jboolean JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_isMultisig(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr) {
+        return JNI_FALSE;
+    }
+    return static_cast<jboolean>(wallet->multisig().isMultisig);
+}
+
+// Get multisig info string for wallet setup
+JNIEXPORT jstring JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_getMultisigInfo(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr) {
+        return env->NewStringUTF("");
+    }
+    std::string multisigInfo = wallet->getMultisigInfo();
+    return env->NewStringUTF(multisigInfo.c_str());
+}
+
+// Make multisig wallet from collected info
+JNIEXPORT jstring JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_makeMultisig(JNIEnv *env, jobject instance,
+                                                     jobject multisigInfoList, jint threshold) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr || multisigInfoList == nullptr) {
+        return env->NewStringUTF("");
+    }
+    
+    std::vector<std::string> info = java2cpp(env, multisigInfoList);
+    if (info.empty()) {
+        return env->NewStringUTF("");
+    }
+    
+    std::string result = wallet->makeMultisig(info, (uint32_t) threshold);
+    return env->NewStringUTF(result.c_str());
+}
+
+// Exchange multisig keys for M/N wallets (additional rounds for complex schemes)
+JNIEXPORT jstring JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_exchangeMultisigKeys(JNIEnv *env, jobject instance,
+                                                            jobject multisigInfoList,
+                                                            jboolean forceUpdateUseWithCaution) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr || multisigInfoList == nullptr) {
+        return env->NewStringUTF("");
+    }
+    
+    std::vector<std::string> info = java2cpp(env, multisigInfoList);
+    if (info.empty()) {
+        return env->NewStringUTF("");
+    }
+    
+    std::string result = wallet->exchangeMultisigKeys(info, forceUpdateUseWithCaution);
+    return env->NewStringUTF(result.c_str());
+}
+
+// Export multisig images (key images) for wallet synchronization
+// Note: exportMultisigImages takes a reference parameter and returns bool
+JNIEXPORT jstring JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_exportMultisigImages(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr) {
+        return env->NewStringUTF("");
+    }
+    
+    std::string images;
+    bool success = wallet->exportMultisigImages(images);
+    if (!success) {
+        LOGE("exportMultisigImages failed: %s", wallet->errorString().c_str());
+        return env->NewStringUTF("");
+    }
+    
+    return env->NewStringUTF(images.c_str());
+}
+
+// Import multisig images from other participants for wallet synchronization
+JNIEXPORT jint JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_importMultisigImages(JNIEnv *env, jobject instance,
+                                                            jobject multisigImagesList) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr || multisigImagesList == nullptr) {
+        return 0;
+    }
+    
+    std::vector<std::string> images = java2cpp(env, multisigImagesList);
+    if (images.empty()) {
+        return 0;
+    }
+    
+    size_t imported = wallet->importMultisigImages(images);
+    return static_cast<jint>(imported);
+}
+
+// Restore a multisig transaction from exported data
+// Returns a PendingTransaction handle that can be signed
+JNIEXPORT jlong JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_restoreMultisigTransaction(JNIEnv *env, jobject instance,
+                                                                  jstring txData) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr || txData == nullptr) {
+        return 0;
+    }
+    
+    JNIStringGuard _txData(env, txData);
+    if (!_txData.isValid()) {
+        return 0;
+    }
+    
+    Monero::PendingTransaction *tx = wallet->restoreMultisigTransaction(_txData.get());
+    return reinterpret_cast<jlong>(tx);
+}
+
+// Get multisig state information as a structured object
+JNIEXPORT jobject JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_getMultisigState(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr) {
+        return nullptr;
+    }
+    
+    Monero::MultisigState state = wallet->multisig();
+    
+    // Create a Java object to return the multisig state
+    // Requires a corresponding Java class: com.m2049r.xmrwallet.model.MultisigState
+    // Constructor signature: (ZIII)V for (boolean isMultisig, int isReady, int threshold, int total)
+    jclass multisigStateClass = env->FindClass("com/m2049r/xmrwallet/model/MultisigState");
+    if (multisigStateClass == nullptr) {
+        return nullptr;
+    }
+    
+    jmethodID constructor = env->GetMethodID(multisigStateClass, "<init>", "(ZIII)V");
+    if (constructor == nullptr) {
+        return nullptr;
+    }
+    
+    jobject stateObject = env->NewObject(multisigStateClass, constructor,
+                                        static_cast<jboolean>(state.isMultisig),
+                                        static_cast<jint>(state.isReady),
+                                        static_cast<jint>(state.threshold),
+                                        static_cast<jint>(state.total));
+    
+    return stateObject;
+}
+
+// Get the number of required signatures (threshold) for the multisig wallet
+JNIEXPORT jint JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_multisigThreshold(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr) {
+        return 0;
+    }
+    return static_cast<jint>(wallet->multisig().threshold);
+}
+
+// Check if multisig wallet is ready for creating/signing transactions
+JNIEXPORT jboolean JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_isMultisigReady(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr) {
+        return JNI_FALSE;
+    }
+    return static_cast<jboolean>(wallet->multisig().isReady);
+}
+
+// Get total number of multisig participants
+JNIEXPORT jint JNICALL
+Java_com_m2049r_xmrwallet_model_Wallet_multisigTotal(JNIEnv *env, jobject instance) {
+    Monero::Wallet *wallet = getHandle<Monero::Wallet>(env, instance);
+    if (wallet == nullptr) {
+        return 0;
+    }
+    return static_cast<jint>(wallet->multisig().total);
+}
+
+/**********************************/
+/** PendingTransaction Multisig ***/
+/**********************************/
+
+// Export multisig sign data from a pending transaction
+// This data is shared with other signers so they can sign the transaction
+JNIEXPORT jstring JNICALL
+Java_com_m2049r_xmrwallet_model_PendingTransaction_multisigSignData(JNIEnv *env, jobject instance) {
+    Monero::PendingTransaction *tx = getHandle<Monero::PendingTransaction>(env, instance);
+    if (tx == nullptr) {
+        return env->NewStringUTF("");
+    }
+    
+    std::string signData = tx->multisigSignData();
+    return env->NewStringUTF(signData.c_str());
+}
+
+// Sign a multisig transaction
+// Note: This method returns void - it modifies the transaction in place
+JNIEXPORT void JNICALL
+Java_com_m2049r_xmrwallet_model_PendingTransaction_signMultisigTx(JNIEnv *env, jobject instance) {
+    Monero::PendingTransaction *tx = getHandle<Monero::PendingTransaction>(env, instance);
+    if (tx != nullptr) {
+        tx->signMultisigTx();
+    }
+}
+
+// Get the list of public keys of signers who have already signed this transaction
+JNIEXPORT jobject JNICALL
+Java_com_m2049r_xmrwallet_model_PendingTransaction_getSignersKeys(JNIEnv *env, jobject instance) {
+    Monero::PendingTransaction *tx = getHandle<Monero::PendingTransaction>(env, instance);
+    if (tx == nullptr) {
+        return cpp2java(env, std::vector<std::string>());
+    }
+    
+    std::vector<std::string> signers = tx->signersKeys();
+    return cpp2java(env, signers);
+}
+
 // TransactionHistory
 JNIEXPORT jint JNICALL
 Java_com_m2049r_xmrwallet_model_TransactionHistory_getCount(JNIEnv *env, jobject instance) {

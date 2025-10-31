@@ -168,8 +168,7 @@ cp -r output/arm64-v8a your-app/src/main/cpp/libs/
 ### What Happens During Build
 
 1. **Docker Image Creation**
-   - Pulls base Ubuntu 20.04 image
-   - Installs Android NDK r23c
+   - Installs Android NDK r29
    - Sets up build dependencies
    - Configures toolchain for target architecture
 
