@@ -68,7 +68,7 @@ public class TransactionHistory {
         loadNotes(wallet);
     }
 
-    private void refresh() {
+    public void refresh() {
         transactions = refreshJ(accountIndex);
     }
 

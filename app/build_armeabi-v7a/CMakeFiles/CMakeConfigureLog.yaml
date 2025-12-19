@@ -1,0 +1,427 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:200 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The target system is: Android - 1 - armv7-a
+      The host system is: Linux - 6.14.0-33-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-march=armv7-a;-mthumb;-Wformat;-Werror=format-security
+      Id flags: -c;--target=armv7-none-linux-androideabi33 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is Clang, found in:
+        /home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/3.31.6/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ 
+      Build flags: -g;-DANDROID;-fdata-sections;-ffunction-sections;-funwind-tables;-fstack-protector-strong;-no-canonical-prefixes;-D_FORTIFY_SOURCE=2;-march=armv7-a;-mthumb;-Wformat;-Werror=format-security
+      Id flags: -c;--target=armv7-none-linux-androideabi33 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is Clang, found in:
+        /home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A"
+      binary: "/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A"
+    cmakeVariables:
+      ANDROID_ABI: "armeabi-v7a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-33"
+      ANDROID_STL: "c++_static"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps"
+      CMAKE_CXX_COMPILER_TARGET: "armv7-none-linux-androideabi33"
+      CMAKE_C_COMPILER_TARGET: "armv7-none-linux-androideabi33"
+      CMAKE_C_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat "
+      CMAKE_EXE_LINKER_FLAGS: "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bdffb/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_bdffb.dir/build.make CMakeFiles/cmTC_bdffb.dir/build
+        gmake[1]: Entering directory '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A'
+        Building C object CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o
+        /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=armv7-none-linux-androideabi33 --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c
+        Android (13065274, +pgo, +bolt, +lto, +mlgo, based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)
+        Target: armv7-none-linux-android33
+        Thread model: posix
+        InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin
+         (in-process)
+         "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple thumbv7-none-linux-android33 -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A -resource-dir /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20 -dependency-file CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c
+        clang -cc1 version 20.0.0 based upon LLVM 20.0.0 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include
+         /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi
+         /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+        End of search list.
+        Linking C executable cmTC_bdffb
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bdffb.dir/link.txt --verbose=1
+        Android (13065274, +pgo, +bolt, +lto, +mlgo, based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)
+        Target: armv7-none-linux-android33
+        Thread model: posix
+        InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin
+         "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=gnu --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_bdffb /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33 -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o
+        /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=armv7-none-linux-androideabi33 --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat   -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -o cmTC_bdffb
+        gmake[1]: Leaving directory '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include]
+          add: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+          add: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include]
+        collapse include dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        collapse include dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        implicit include dirs: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bdffb/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_bdffb.dir/build.make CMakeFiles/cmTC_bdffb.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A']
+        ignore line: [Building C object CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=armv7-none-linux-androideabi33 --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c]
+        ignore line: [Android (13065274  +pgo  +bolt  +lto  +mlgo  based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)]
+        ignore line: [Target: armv7-none-linux-android33]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple thumbv7-none-linux-android33 -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-O6R08A -resource-dir /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20 -dependency-file CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang -cc1 version 20.0.0 based upon LLVM 20.0.0 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include]
+        ignore line: [ /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        ignore line: [ /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Linking C executable cmTC_bdffb]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bdffb.dir/link.txt --verbose=1]
+        ignore line: [Android (13065274  +pgo  +bolt  +lto  +mlgo  based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)]
+        ignore line: [Target: armv7-none-linux-android33]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        link line: [ "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=gnu --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_bdffb /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33 -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o]
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
+          arg [-EL] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [-X] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [armelf_linux_eabi] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_bdffb] ==> ignore
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o] ==> obj [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_bdffb.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o] ==> obj [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o]
+        linker tool for 'C': /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld
+        remove lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+        remove lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit libs: [-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o]
+        implicit dirs: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" "-v"
+      LLD 20.0.0 (/mnt/disks/build-disk/src/android/llvm-r547379-release/out/llvm-project/llvm b718bcaf8c198c82f3021447d943401e3ab5bd54) (compatible with GNU linkers)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm"
+      binary: "/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm"
+    cmakeVariables:
+      ANDROID_ABI: "armeabi-v7a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PIE: "TRUE"
+      ANDROID_PLATFORM: "android-33"
+      ANDROID_STL: "c++_static"
+      ANDROID_TOOLCHAIN: "clang"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-scan-deps"
+      CMAKE_CXX_COMPILER_TARGET: "armv7-none-linux-androideabi33"
+      CMAKE_CXX_FLAGS: "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat  "
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_C_COMPILER_TARGET: "armv7-none-linux-androideabi33"
+      CMAKE_EXE_LINKER_FLAGS: "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  "
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_c6e1a/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_c6e1a.dir/build.make CMakeFiles/cmTC_c6e1a.dir/build
+        gmake[1]: Entering directory '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm'
+        Building CXX object CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o
+        /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi33 --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        Android (13065274, +pgo, +bolt, +lto, +mlgo, based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)
+        Target: armv7-none-linux-android33
+        Thread model: posix
+        InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin
+         (in-process)
+         "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple thumbv7-none-linux-android33 -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm -resource-dir /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20 -dependency-file CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 20.0.0 based upon LLVM 20.0.0 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1
+         /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include
+         /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi
+         /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+        End of search list.
+        Linking CXX executable cmTC_c6e1a
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6e1a.dir/link.txt --verbose=1
+        Android (13065274, +pgo, +bolt, +lto, +mlgo, based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)
+        Target: armv7-none-linux-android33
+        Thread model: posix
+        InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin
+         "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=gnu --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_c6e1a /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33 -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o
+        /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi33 --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat    -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_c6e1a
+        gmake[1]: Leaving directory '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+          add: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include]
+          add: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+          add: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        collapse include dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include]
+        collapse include dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        collapse include dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        implicit include dirs: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_c6e1a/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_c6e1a.dir/build.make CMakeFiles/cmTC_c6e1a.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm']
+        ignore line: [Building CXX object CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi33 --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Android (13065274  +pgo  +bolt  +lto  +mlgo  based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)]
+        ignore line: [Target: armv7-none-linux-android33]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple thumbv7-none-linux-android33 -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=1 -target-cpu generic -target-feature +soft-float-abi -target-feature +vfp2 -target-feature +vfp2sp -target-feature +vfp3 -target-feature +vfp3d16 -target-feature +vfp3d16sp -target-feature +vfp3sp -target-feature -fp16 -target-feature -vfp4 -target-feature -vfp4d16 -target-feature -vfp4d16sp -target-feature -vfp4sp -target-feature -fp-armv8 -target-feature -fp-armv8d16 -target-feature -fp-armv8d16sp -target-feature -fp-armv8sp -target-feature -fullfp16 -target-feature +fp64 -target-feature +d32 -target-feature +neon -target-feature -sha2 -target-feature -aes -target-feature -fp16fml -target-abi aapcs-linux -mfloat-abi soft -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/niyid/git/xmrwallet/app/build_armeabi-v7a/CMakeFiles/CMakeScratch/TryCompile-sqYadm -resource-dir /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20 -dependency-file CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include -internal-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 20.0.0 based upon LLVM 20.0.0 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1]
+        ignore line: [ /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include]
+        ignore line: [ /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/arm-linux-androideabi]
+        ignore line: [ /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Linking CXX executable cmTC_c6e1a]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6e1a.dir/link.txt --verbose=1]
+        ignore line: [Android (13065274  +pgo  +bolt  +lto  +mlgo  based on r547379) clang version 20.0.0 (https://android.googlesource.com/toolchain/llvm-project b718bcaf8c198c82f3021447d943401e3ab5bd54)]
+        ignore line: [Target: armv7-none-linux-android33]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin]
+        link line: [ "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL -z now -z relro -z max-page-size=4096 -X --hash-style=gnu --eh-frame-hdr -m armelf_linux_eabi -pie -dynamic-linker /system/bin/linker -o cmTC_c6e1a /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33 -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib -L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl -lc /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a -l:libunwind.a -ldl /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o]
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
+          arg [-EL] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [-X] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [armelf_linux_eabi] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_c6e1a] ==> ignore
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o] ==> obj [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib]
+          arg [-L/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [CMakeFiles/cmTC_c6e1a.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-Bstatic] ==> search static
+          arg [-lc++] ==> lib [c++]
+          arg [-Bdynamic] ==> search dynamic
+          arg [-lm] ==> lib [m]
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a] ==> lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o] ==> obj [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o]
+        linker tool for 'CXX': /mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld
+        remove lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+        remove lib [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/libclang_rt.builtins-arm-android.a]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/../lib] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        collapse library dir [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib] ==> [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit libs: [c++;m;-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtbegin_dynamic.o;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33/crtend_android.o]
+        implicit dirs: [/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/lib/linux/arm;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/33;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi;/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/mnt/android-sdk/ndk/29.0.13113456/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" "-v"
+      LLD 20.0.0 (/mnt/disks/build-disk/src/android/llvm-r547379-release/out/llvm-project/llvm b718bcaf8c198c82f3021447d943401e3ab5bd54) (compatible with GNU linkers)
+...

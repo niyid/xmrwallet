@@ -1,16 +1,91 @@
-.gradle
-/build
+# ==========================================================
+# Android / Gradle / Studio
+# ==========================================================
+.gradle/
+build/
 *.iml
-/.idea
-/local.properties
-/captures
-.externalNativeBuild
+.idea/
+local.properties
+captures/
 .DS_Store
-/app/build
-/app/release
-/app/alpha*
-/app/prod*
-/app/.cxx
+.externalNativeBuild/
+.cxx/
+app/.cxx/
+app/CMakeFiles/
+app/CMakeCache.txt
+app/cmake_install.cmake
+app/CMakeConfigureLog.yaml
+app/Makefile
+*.cmake
+
+# ==========================================================
+# APK / AAB / Binary outputs
+# ==========================================================
+# Application packages
+*.apk
+*.ap_
+*.aab
+
+# Native libs and builds
+*.so
+*.a
+*.o
+*.obj
+*.dll
+*.exe
+*.bin
+*.lib
+*.jar
+*.aar
+
+# NDK and external builds
+app/build_*/
+external-libs/monero/lib/
+external-libs/boost-prefix/
+external-libs/build-*/
+external-libs/output/
+external-libs/ndk*/
+external-libs/VERSION
+external-libs/include/wallet2_api.h
+
+# External library archives and logs
+external-libs/*.zip
+external-libs/*.tar.*
+external-libs/*.log
+external-libs/boost-android/
+
+# ==========================================================
+# App-specific build variants
+# ==========================================================
+app/build/
+app/release/
+app/alpha*/
+app/prod*/
+
+# ==========================================================
+# IDE & Project Metadata
+# ==========================================================
+*.swp
+*.log
+*.tmp
+*.bak
+*.orig
+*.rej
+*.class
+*.pyc
+*.pyo
+*.swo
+*.~*
+
+# ==========================================================
+# Local environment files
+# ==========================================================
 /monerujo.id
-/external-libs/VERSION
-/external-libs/include/wallet2_api.h
+.env
+.vscode/
+.settings/
+.idea/
+
+# Allow Gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
